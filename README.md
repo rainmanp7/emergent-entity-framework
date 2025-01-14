@@ -1,4 +1,7 @@
 
+-> ALL FILES ARE NOT VERIFIED YET! <-
+SOLO UNIT TESTS ARE BEING WORKED ON.
+
 # Emergent Entity Framework
 
 ## Overview
