@@ -87,13 +87,13 @@ This framework is designed for applications in **collaborative learning**, **ada
    ```
 
 ### Running the Framework
-1. Run the `bootstrap.py` script to initialize the system and teach the entities:
+1. Run the `teaching v2.py` script to initialize the system and teach the entities:
    ```bash
-   python bootstrap.py
+   python teaching v2.py
    ```
-2. Run the `cross_train.py` script to perform cross-training and enable emergent behavior:
+2. Run the `crosstrain v2.py` script to perform cross-training and enable emergent behavior:
    ```bash
-   python cross_train.py
+   python crosstrain v2.py
    ```
 
 ### Example Tasks
@@ -141,8 +141,8 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 ## Contact
 
 For questions, collaborations, or feedback, please contact:
-- **Chris Brown**: [muslimsoap@example.com](mailto:muslimsoap@gmail.com)
-- **GitHub**: [rainmanp7](https://github.com/rainmanp7)
+- **Chris Brown**: [your.email@example.com](mailto:muslimsoap@gmail.com)
+- **GitHub**: [your-username](https://github.com/rainmanp7)
 
 ---
 
