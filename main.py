@@ -1,5 +1,5 @@
-from teach_entities import bootstrap
-from cross_train import cross_train
+from teaching_v2 import bootstrap
+from crosstrain_v2 import cross_train
 from core.meta_entity_core import EmergentMetaEntity
 from core.entity_core import EmergentEntityCore
 from core.holographic_memory import HolographicMemory
