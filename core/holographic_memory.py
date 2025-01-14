@@ -1,6 +1,7 @@
 import numpy as np
 import sqlite3
 import os
+import hashlib
 from scipy.sparse import random as sparse_random
 from scipy.sparse.linalg import norm
 from scipy.sparse import csr_matrix
@@ -9,7 +10,14 @@ class HolographicMemory:
     def __init__(self, dimensions=16384):
         self.dimensions = dimensions
         self.memory = {}
-        self.db_path = os.path.join("data", "memory.db")
+        
+        # Adjust the path to the data directory
+        main_directory = os.path.dirname(os.path.dirname(__file__))  # Navigate up to the main directory
+        self.db_path = os.path.join(main_directory, "data", "memory.db")
+        
+        # Ensure the data directory exists
+        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
+        
         self._initialize_db()
 
     def _initialize_db(self):
@@ -50,7 +58,14 @@ class HolographicMemory:
     def _to_hyperdimensional(self, vector):
         if isinstance(vector, dict):
             vector = list(vector.values())
-        hd_vector = sparse_random(1, self.dimensions, density=0.1, format='csr')
+        
+        # Convert the input vector to a string and hash it to create a deterministic seed
+        vector_str = str(vector)
+        seed = int(hashlib.sha256(vector_str.encode()).hexdigest(), 16) % (2**32)
+        np.random.seed(seed)  # Seed the random number generator for deterministic behavior
+        
+        # Generate a deterministic hyperdimensional vector
+        hd_vector = sparse_random(1, self.dimensions, density=0.1, format='csr', random_state=seed)
         hd_vector = hd_vector / norm(hd_vector)
         return hd_vector.toarray().flatten()
 
@@ -61,3 +76,10 @@ class HolographicMemory:
     def adaptive_compress(self, vector):
         # Example compression technique
         return vector[:self.dimensions // 2]  # Compress to half the dimensions
+
+# Self-execute section for testing
+if __name__ == "__main__":
+    # Test the HolographicMemory
+    memory = HolographicMemory()
+    memory.dynamic_encode({"input": "test"}, {"output": "result"})
+    print("Retrieved memory:", memory.retrieve({"input": "test"}))

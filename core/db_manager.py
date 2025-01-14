@@ -4,7 +4,13 @@ import os
 class DBManager:
     def __init__(self, db_name):
         self.db_name = db_name
-        self.db_path = os.path.join("data", db_name)
+        
+        # Navigate up to the main directory and then into the 'data' directory
+        self.db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", db_name)
+        
+        # Ensure the data directory exists
+        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
+        
         self.create_table()
 
     def connect(self):
@@ -31,3 +37,9 @@ class DBManager:
         conn.commit()
         conn.close()
         print(f"Data inserted into {self.db_name}: Input={input_data}, Output={output_data}")
+
+# Self-execute section for testing
+if __name__ == "__main__":
+    # Test the DBManager
+    db_manager = DBManager("test.db")
+    db_manager.insert_data("Test input", "Test output")

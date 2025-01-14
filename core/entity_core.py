@@ -1,3 +1,5 @@
+import json  # Import json for converting dictionaries to strings
+
 class EmergentEntityCore:
     """
     An emergent entity core that dynamically interacts with a domain module,
@@ -62,8 +64,11 @@ class EmergentEntityCore:
         # Retrieve all shared knowledge
         shared_memory = self.components["memory"].retrieve_all()
 
+        # Create a copy of the shared memory to avoid modifying it during iteration
+        shared_memory_copy = shared_memory.copy()
+
         # Dynamically encode the shared memory into the other entity
-        for key, value in shared_memory.items():
+        for key, value in shared_memory_copy.items():
             other_entity.components["memory"].dynamic_encode(key, value)
 
         # Inform about the collaboration
@@ -72,7 +77,7 @@ class EmergentEntityCore:
             f"to {other_entity.state['domain_name']}."
         )
 
-# Example usage
+# Self-execute section for testing
 if __name__ == "__main__":
     # Mocked domain module, database manager, and memory for demonstration
     class MockDomainModule:
@@ -87,7 +92,9 @@ if __name__ == "__main__":
             self.data = {}
 
         def dynamic_encode(self, task, output):
-            self.data[task] = output
+            # Convert the dictionary to a string to make it hashable
+            task_key = json.dumps(task, sort_keys=True)  # Use json.dumps for consistent string representation
+            self.data[task_key] = output
 
         def retrieve_all(self):
             return self.data

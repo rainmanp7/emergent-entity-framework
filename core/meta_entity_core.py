@@ -127,7 +127,7 @@ class EmergentMetaEntity:
             new_entity.components["memory"].dynamic_encode(key, value)
         print(f"Split {entity.state['domain_name']} into a new entity.")
 
-# Example usage
+# Self-execute section for testing
 if __name__ == "__main__":
     # Mocked modules, DBManager, and memory for demonstration
     math_module = EmergentMathEntity()

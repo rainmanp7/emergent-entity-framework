@@ -44,3 +44,28 @@ class EntanglementHub:
                 return
         group.add(entity)
         print(f"Added {entity.get_domain()} to synchronized group {group_index}.")
+
+# Self-execute section for testing
+if __name__ == "__main__":
+    # Mock entities for testing
+    class MockEntity:
+        def __init__(self, domain):
+            self.domain = domain
+            self.components = {"memory": MockMemory()}
+
+        def get_domain(self):
+            return self.domain
+
+    class MockMemory:
+        def retrieve_all(self):
+            return {"key": "value"}
+
+        def dynamic_encode(self, key, value):
+            print(f"Encoded {key}: {value}")
+
+    # Test the EntanglementHub
+    hub = EntanglementHub()
+    entity1 = MockEntity("math")
+    entity2 = MockEntity("science")
+    hub.connect(entity1, entity2)
+    hub.synchronize(entity1, entity2)
