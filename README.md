@@ -141,7 +141,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 ## Contact
 
 For questions, collaborations, or feedback, please contact:
-- **Chris Brown**: [muslimsoap@example.com](mailto:muslimsoap@gmail.com)
+- **Chris Brown**: [muslimsoap@gmail.com](mailto:muslimsoap@gmail.com)
 - **GitHub**: [rainmanp7](https://github.com/rainmanp7)
 
 ---
